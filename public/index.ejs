@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Social And Information Networks</title>
+</head>
+
+<style>
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	@font-face {
+		src: url('./Roboto-Light.ttf');
+		font-family: roboto;
+	}
+
+	@font-face {
+		src: url('./Roboto-Thin.ttf');
+		font-family: roboto-thin;
+	}
+
+	h3 {
+		margin: 0;
+		padding: 20px 0;
+		font-size: 24px;
+	}
+	
+	h1 {
+		background-color: #455A64;
+		color: white;
+		font-family: roboto-thin;
+		width: 100%;
+		text-align: center;
+		margin: 0;
+		padding: 20px 0;
+	}
+
+	.selectedMovie {
+		font-family: roboto-thin;
+		color: white;
+		background-color: #607D8A;
+		text-align: center;
+		padding: 20px 0 30px 0;
+	}
+
+	h4 {
+		text-align: center;
+		font-size: 24px;
+		font-family: roboto;
+		margin-bottom: 50px;
+	}
+
+	ul {
+		list-style: none;
+		display: flex;
+		justify-content: space-around;
+		width: 80%;
+		margin: auto;
+		font-family: roboto;
+		padding: 0;
+	}
+
+	li {
+		display: inline;
+	}
+
+</style>
+
+
+<body>
+
+	<h1>MOVIE RECOMMENDATION SYSTEM</h1>
+
+	<div class="selectedMovie">
+
+		<h3>Batman: The Dark Knight</h3>
+
+		<div class="movieImage">
+			<img src="./samplePoster.jpeg">
+		</div>
+
+	</div>
+
+	<hr><hr><hr>
+
+	<h4>RECOMMENDED MOVIES</h3>
+	<ul>
+		
+	</ul>
+
+	<script type="text/javascript" src="./jQuery.js"></script>
+	<script type="text/javascript">
+
+		var movieName = $('h3').val();
+		console.log(movieName);
+		var movieList = $('ul');
+
+		$.ajax({
+			url: '/',
+			type: 'POST',
+			data: {movie: movieName},
+		})
+		.done(function(recommendedMoviesArray) {
+			
+
+			recommendedMoviesArray.forEach( function(element, index) {
+
+				var recommendedMovie = $('<li></li>', {
+					text:element
+				});
+
+				movieList.append(recommendedMovie);
+
+			});
+
+		});
+		
+	</script>
+
+</body>
+</html>
